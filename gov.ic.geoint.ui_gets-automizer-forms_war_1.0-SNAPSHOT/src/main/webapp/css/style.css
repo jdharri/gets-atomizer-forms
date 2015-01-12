@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);
+/*@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro);*/
 
 
 /*reset*/
@@ -72,7 +72,7 @@ html{
 }
 
 body {
-    font-family:Merriweather, serif;
+    font-family:sans-serif;
     font-size: 1rem;
     line-height: 160%;
     *zoom:1;
@@ -80,8 +80,24 @@ body {
 
 .gets-navbar{
     background-color:#31437D;
+    font-size: x-large;
     color: #FFF;
 }
 .gets-navbar li a{
     color:#FFF;
+}
+.gets-navbar-logo{
+   height: 120px;
+   margin-top:-50px;
+   padding: 0;
+   
+}
+.navbar-static-top{
+    margin-top: 100px;
+}
+.navbar .container{
+    height: 2em;
+}
+.nav > li > a:hover{
+    background-color: #293869;
 }

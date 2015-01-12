@@ -11,21 +11,42 @@
         <script src="webjars/angularjs/1.3.8/angular-route.min.js"></script>
         <script src='js/controllers.js'></script>
 
-     
-         <link rel="stylesheet" href="css/style.css"/>
-           <link rel="stylesheet" href="webjars/bootstrap/3.1.1/css/bootstrap.css"/>
+
+
+        <link rel="stylesheet" href="webjars/bootstrap/3.1.1/css/bootstrap.css"/>
         <link rel="stylesheet" href="webjars/bootstrap/3.1.1/css/bootstrap-theme.css"/>
-       
+        <link rel="stylesheet" href="css/style.css"/>
+
 
     </head>
     <body>
-       
-        <div ng-view></div>
-<!--        <div ng-controller ="MyController" >
 
-            <h1>{{ author.name}}</h1>
-            <p>{{ author.title + ', ' + author.company}}</p>
-        </div>-->
+        <div >
+
+            <nav class="navbar  navbar-static-top "  role="navigation" >
+                <div class="navbar-header">
+                  
+                    <a href="#" class="navbar-brand pull-left gets-navbar ">
+                        <img class="gets-navbar-logo" src="images/GETSv4_logo-border.png" alt="GETS"/>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" >
+                      <ul class="nav nav-justified gets-navbar">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li class="navbar-btn"><a href="#">Projects</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Downloads</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!--        <div ng-controller ="MyController" >
+        
+                    <h1>{{ author.name}}</h1>
+                    <p>{{ author.title + ', ' + author.company}}</p>
+                </div>-->
 
 
 
