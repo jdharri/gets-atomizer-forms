@@ -87,10 +87,10 @@ body {
     color:#FFF;
 }
 .gets-navbar-logo{
-   height: 120px;
-   margin-top:-50px;
-   padding: 0;
-   
+    height: 120px;
+    margin-top:-50px;
+    padding: 0;
+
 }
 .navbar-static-top{
     margin-top: 100px;
@@ -100,4 +100,24 @@ body {
 }
 .nav > li > a:hover{
     background-color: #293869;
+}
+.document-title{
+    font-size: xx-large;
+}
+.requirements-form {
+    padding: 2em;
+    margin: 2em;
+}
+.requirements-form-element{
+  
+    margin: 2em;
+    padding-bottom: 1em;
+}
+.element-indent{
+    margin-left: 3em;
+   
+}
+.requirements-form-section-title{
+    font-size: x-large;
+    padding-bottom: 1em;
 }

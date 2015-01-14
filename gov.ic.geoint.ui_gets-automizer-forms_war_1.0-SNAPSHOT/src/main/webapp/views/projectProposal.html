@@ -1,0 +1,107 @@
+
+<section class="requirements-form " style="border:1px solid gray">
+    <form name="projectProposal" novalidate>
+        <div class="row requirements-form-element">
+            <div class="col-offset-6 col-lg-8 " style=" text-align: center">
+                <input class="form-control" type="text" placeholder="Document Title" autofocus
+                        ng-model="proposal.title" ng-required="true"/>
+                <div class="row document-title requirements-form-element" >
+                    <h1 class="" >Software Project Proposal</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row requirements-form-element" >
+            <label class="requirements-form-section-title ">(U) Purpose</label>
+            <div>
+                <textarea rows="8" cols="60" name="purpose" placeholder="Provide background details about the need for this project, including who will be using the software, environmental considerations (what networks will it be deployed to, requirement to operate disconnected, deployment requirements, etc), what problems the users of the software are currently facing (why is this needed), and what the users are doing now to solve their problem. Pictures, graphs, screenshots, or anything that can help explain the project better is recommended. This section should not provide justifications for individual use cases, capabilities, or solutions."
+                          ng-model="proposal.purpose" ></textarea>
+            </div>
+        </div>
+
+        <div class="requirements-form-element">
+            <label  class=" requirements-form-section-title ">(U) Actors</label>
+            <div class="row">
+                <div class="col-offset-2 col-md-10">Lists the actors, or users, of this system, along with a brief description of that actor. Actors will be referenced by both use cases and functional capabilities of the project.</div>
+            </div>
+        </div>
+        <div class="row requirements-form-element" ng-controller="ActorController">
+
+            <div class=" form-group input-group"  ng-repeat="actor in actors" >
+                <div class="col-md-6">
+                    <input class="form-control " type="text" name="actorname" placeholder="actor"
+                           ng-model="actor.name"/>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control " type="text" name="actordescription" placeholder="description"
+                           ng-model="actor.description"/>
+                </div>
+            </div>
+            <button class="btn btn-default " ng-click="add()"><span class="glyphicon glyphicon-plus"></span> actor</button>
+        </div>
+
+
+        <div class="requirements-form-element">
+            <label  class="requirements-form-section-title ">(U) Use Cases</label>
+
+            <div>Hierarchically ordered user (or data) workflow details that must exist in the end-user application. An example would be detailing the steps of a required business process.
+            </div>
+        </div>
+        <div class="row requirements-form-element" ng-controller="UseCaseController">
+            <div class=" form-group input-group"  ng-repeat="useCase in useCases" >
+
+                <span class="input-group-addon"> {{$index + 1}}</span><input class="form-control" type="text" name="usecase" placeholder="Use Case"
+                                                                             ng-model="useCase.description"/>
+
+            </div>
+            <button class="btn btn-default" ng-click="add()">
+                <span class="glyphicon glyphicon-plus"></span> Use Case</button>
+        </div>
+
+        <div class="row requirements-form-element" >
+            <label class="requirements-form-section-title ">(U) Capabilities</label>
+            <div>
+                <cite>List of individual application capabilities, both functional and non-functional, of the application. These capabilities will be managed in atomizer.</cite>
+            </div>
+        </div>
+
+        <div class="row requirements-form-element element-indent" >
+            <label class="requirements-form-section-title ">(U) Functional</label>
+
+        </div>
+        <div class="row requirements-form-element" ng-controller="FunctionalCapabilitiesController">
+            <div class=" form-group input-group"  ng-repeat="capability in functionalCapabilities" >
+
+                <span class="input-group-addon"> {{$index + 1}}</span>
+                <input class="form-control" type="text" name="capability" placeholder="Functional Capability"
+                       ng-model="capability.description"/>
+
+            </div>
+            <button class="btn btn-default" ng-click="add()">
+                <span class="glyphicon glyphicon-plus"></span> Functional</button>
+
+        </div>
+
+
+        <div class="row requirements-form-element element-indent" >
+            <label class="requirements-form-section-title ">(U) Non-functional</label>
+
+        </div>
+        <div class="row requirements-form-element" ng-controller="NonFunctionalCapabilitiesController">
+            <ul>
+            <li class=" form-group input-group"  ng-repeat="capability in nonFunctionalCapabilities" >
+
+               
+                <input class="form-control" type="text" name="capability" placeholder="Non-functional Capability"
+                       ng-model="capability.description"/>
+
+            </li>
+            </ul>
+            <button class="btn btn-default" ng-click="add()">
+                <span class="glyphicon glyphicon-plus"></span> Non-functional</button>
+
+        </div>
+
+        <button class="btn btn-default row "><span class="glyphicon glyphicon-ok" style="color:green"></span> Submit</button>
+    </form>
+</section>
