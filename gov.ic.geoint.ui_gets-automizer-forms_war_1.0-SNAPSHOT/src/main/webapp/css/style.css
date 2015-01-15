@@ -121,3 +121,5 @@ body {
     font-size: x-large;
     padding-bottom: 1em;
 }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

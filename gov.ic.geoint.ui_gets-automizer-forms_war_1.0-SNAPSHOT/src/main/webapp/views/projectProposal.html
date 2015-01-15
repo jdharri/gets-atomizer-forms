@@ -4,7 +4,7 @@
         <div class="row requirements-form-element">
             <div class="col-offset-6 col-lg-8 " style=" text-align: center">
                 <input class="form-control" type="text" placeholder="Document Title" autofocus
-                        ng-model="proposal.title" ng-required="true"/>
+                       ng-model="proposal.title" ng-required="true"/>
                 <div class="row document-title requirements-form-element" >
                     <h1 class="" >Software Project Proposal</h2>
                 </div>
@@ -72,7 +72,7 @@
         <div class="row requirements-form-element" ng-controller="FunctionalCapabilitiesController">
             <div class=" form-group input-group"  ng-repeat="capability in functionalCapabilities" >
 
-                <span class="input-group-addon"> {{$index + 1}}</span>
+                <span class="input-group-addon glyphicon glyphicon-star"> </span>
                 <input class="form-control" type="text" name="capability" placeholder="Functional Capability"
                        ng-model="capability.description"/>
 
@@ -88,20 +88,36 @@
 
         </div>
         <div class="row requirements-form-element" ng-controller="NonFunctionalCapabilitiesController">
-            <ul>
-            <li class=" form-group input-group"  ng-repeat="capability in nonFunctionalCapabilities" >
 
-               
+            <div class=" form-group input-group"  ng-repeat="capability in nonFunctionalCapabilities" >
+
+                <span class="input-group-addon glyphicon glyphicon-star"> </span>
                 <input class="form-control" type="text" name="capability" placeholder="Non-functional Capability"
                        ng-model="capability.description"/>
 
-            </li>
-            </ul>
+            </div>
+
             <button class="btn btn-default" ng-click="add()">
                 <span class="glyphicon glyphicon-plus"></span> Non-functional</button>
 
         </div>
-
+        <div class="row">
+            <input type="text" class="form-control" name="createdBy"/>
+             <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+            <input type="text" class="form-control" name="reviewedBy"/>
+            <input type="text" class="form-control" name="reviewDate"/>
+        </div>
         <button class="btn btn-default row "><span class="glyphicon glyphicon-ok" style="color:green"></span> Submit</button>
     </form>
 </section>

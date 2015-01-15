@@ -1,5 +1,4 @@
-var softwareDocApp = angular.module('softwareDocApp', ['ngRoute', 'mgcrea.ngStrap', 'formControllers']);
-
+var softwareDocApp = angular.module('softwareDocApp', ['ngRoute',  'formControllers', 'ui.date']);
 var formControllers = angular.module('formControllers', []);
 
 softwareDocApp.config(['$routeProvider', function ($routeProvider) {
