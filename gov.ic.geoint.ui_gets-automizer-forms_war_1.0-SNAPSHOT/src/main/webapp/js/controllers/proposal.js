@@ -1,11 +1,11 @@
-softwareDocApp.config(function($datepickerProvider) {
-  angular.extend($datepickerProvider.defaults, {
-    dateFormat: 'dd/MM/yyyy',
-    startWeek: 1
-  });
+softwareDocApp.config(function ($datepickerProvider) {
+    angular.extend($datepickerProvider.defaults, {
+        dateFormat: 'dd/MM/yyyy',
+        startWeek: 1
+    });
 })
 softwareDocApp.controller('ProjectProposalController', ['$scope', function ProjectProposalController($scope) {
-       $scope.doc = {};
+        $scope.doc = {};
         $scope.doc.selectedDate = new Date();
         $scope.doc.selectedDateAsNumber = Date.UTC(1986, 1, 22);
         // $scope.fromDate = new Date();
@@ -30,11 +30,28 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
 
         $scope.doc.useCases = [];
 
-        $scope.addUseCase = function () {
-
+        $scope.addUseCase = function (blah) {
+            // console.debug(blah.$modelValue)
             $scope.doc.useCases.push({
-                description: ""
+                id: $scope.doc.useCases.length + 1,
+                description: "",
+                subCases: []
             });
+        };
+        $scope.removeUseCase = function () {
+            scope.remove();
+        };
+
+
+        $scope.addSubUseCase = function (scope) {
+
+            var nodeData = scope.$modelValue;
+            console.debug(nodeData)
+            nodeData.subCases.push({
+                id: nodeData.id + '.' + (nodeData.subCases.length + 1),
+                description: "",
+                subCases: []
+            })
         };
 
 
@@ -58,6 +75,6 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
         };
 
         $scope.submit = function () {
-            console.log($scope.doc);
+            //  console.log($scope.doc);
         }
     }]);

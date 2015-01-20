@@ -1,6 +1,6 @@
 
 <section class="requirements-form " style="border:1px solid gray">
-    <form name="projectProposal" novalidate 
+    <form class="form-inline" name="projectProposal" novalidate 
           ng-submit="submit()">
         <div class="row requirements-form-element">
             <div class="col-offset-6 col-lg-8 " style=" text-align: center">
@@ -29,13 +29,17 @@
         <div class="row requirements-form-element" >
 
             <div class=" form-group input-group"  ng-repeat="actor in doc.actors" >
-                <div class="col-md-6">
-                    <input class="form-control " type="text" name="actorname" placeholder="actor"
+                <div class="col-md-3">
+                    <input class="form-control " type="text" name="actorname" placeholder="Actor Name"
                            ng-model="actor.name" auto-focus/>
                 </div>
                 <div class="col-md-6">
-                    <input class="form-control " type="text" name="actordescription" placeholder="description"
+                    <input class="form-control " type="text" name="actordescription" placeholder="Description"
                            ng-model="actor.description"  ng-enter="addActor()"/>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control " type="text" name="actorcode" placeholder="Actor Code"
+                           ng-model="actor.code"  ng-enter="addActor()"/>
                 </div>
             </div>
             <button class="btn btn-default " ng-click="addActor()"><span class="glyphicon glyphicon-plus"></span> actor</button>
@@ -48,15 +52,44 @@
             <div>Hierarchically ordered user (or data) workflow details that must exist in the end-user application. An example would be detailing the steps of a required business process.
             </div>
         </div>
-        <div class="row requirements-form-element" >
-            <div class=" form-group input-group"  ng-repeat="useCase in doc.useCases" >
 
-                <span class="input-group-addon"> {{$index + 1}}</span>
-                <input class="form-control" type="text" name="usecase" placeholder="Use Case"
-                       ng-model="useCase.description" auto-focus ng-enter="addUseCase()"/>
+        <div class="row requirements-form-element"  >
+            <div ui-tree data-empty-place-holder-enabled="false">
+                <div ui-tree-nodes="" ng-model="doc.useCases">
+                    <div class=" col-md-12"  ng-repeat="useCase in doc.useCases" ui-tree-node >
+                        <div class="input-group">
+                            <span class="input-group-addon "> {{useCase.id}}</span>
+                            <input class="form-control " type="text" name="usecase" placeholder="Use Case"
+                                   ng-model="useCase.description" auto-focus ng-enter="addUseCase();"/>
+                            <a class="input-group-addon  btn btn-primary btn-xs" data-nodrag ng-click="addSubUseCase(this)" style="margin-right: 8px;">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
 
+                            <a class="input-group-addon  btn btn-danger btn-xs" data-nodrag ng-click="remove(this)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+
+                        </div>
+                        <div class="" ui-tree-nodes="" ng-model="useCase.subCases">
+                            <div ng-repeat="useCase in useCase.subCases" ui-tree-node>
+                                <div class="input-group">
+                                    <span class="input-group-addon "> {{useCase.id}}</span>
+                                    <input class="form-control" type="text" name="subusecase" placeholder="Use Case"
+                                           ng-model="useCase.description" auto-focus ng-enter="addSubUseCase();"/>
+                                    <a class="input-group-addon btn btn-primary btn-xs" data-nodrag ng-click="addSubUseCase(this)" style="margin-right: 8px;">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </a>
+                                    <a class="input-group-addon btn btn-danger btn-xs" data-nodrag ng-click="removeUseCase(this)">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button class="btn btn-default" ng-click="addUseCase()">
+            <button class="btn btn-default" ng-click="addUseCase(this)">
                 <span class="glyphicon glyphicon-plus"></span> Use Case</button>
         </div>
 
@@ -105,23 +138,23 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-            <label>Created By</label>
-            <input type="text" class="form-control" name="createdBy" ng-model="doc.createdBy" placeholder="Creator's name"/>
-            <div class="form-group " ng-class="{'has-error': createdDate.$invalid}">
-                <label class="control-label"><i class="fa fa-calendar"></i> Date created</label>
-                <input type="text" class="form-control" ng-model="doc.createdDate" name="date" bs-datepicker>
-            </div>
-             <label>Reviewed By</label>
-             <input type="text" class="form-control " name="reviewedBy" ng-model="doc.reviewedBy" placeholder="Reviewer's name"/>
-             <div class="form-group " ng-class="{'has-error': reviewedDate.$invalid}">
-                <label class="control-label"><i class="fa fa-calendar"></i>Date Reviewed</label>
-                <input type="text" class="form-control" ng-model="doc.reviewedDate" name="date" bs-datepicker>
-            </div>
+                <label>Created By</label>
+                <input type="text" class="form-control" name="createdBy" ng-model="doc.createdBy" placeholder="Creator's name"/>
+                <div class="form-group " ng-class="{'has-error': createdDate.$invalid}">
+                    <label class="control-label"><i class="fa fa-calendar"></i> Date created</label>
+                    <input type="text" class="form-control" ng-model="doc.createdDate" name="date" bs-datepicker>
+                </div>
+                <label>Reviewed By</label>
+                <input type="text" class="form-control " name="reviewedBy" ng-model="doc.reviewedBy" placeholder="Reviewer's name"/>
+                <div class="form-group " ng-class="{'has-error': reviewedDate.$invalid}">
+                    <label class="control-label"><i class="fa fa-calendar"></i>Date Reviewed</label>
+                    <input type="text" class="form-control" ng-model="doc.reviewedDate" name="date" bs-datepicker>
+                </div>
             </div>
         </div>
         <button class="btn btn-default row "><span class="glyphicon glyphicon-ok" style="color:green"></span> Submit</button>
     </form>
     <div>
-  {{doc}}
+        {{doc}}
     </div>
 </section>
