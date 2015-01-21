@@ -5,7 +5,10 @@ softwareDocApp.config(function ($datepickerProvider) {
     });
 })
 softwareDocApp.controller('ProjectProposalController', ['$scope', function ProjectProposalController($scope) {
-        $scope.doc = {};
+
+        $scope.doc ={"selectedDate":"2015-01-21T17:24:08.657Z","selectedDateAsNumber":509414400000,"actors":[],"useCases":[{"id":1,"description":"asdfaas","subCases":[{"id":"1.1","description":"dfas","subCases":[{"id":"1.1.1","description":"","subCases":[]},{"id":"1.1.2","description":"","subCases":[]},{"id":"1.1.3","description":"","subCases":[]}]},{"id":"1.2","description":"dfasddf","subCases":[{"id":"1.2.1","description":"","subCases":[]}]}]},{"id":2,"description":"asddfaas","subCases":[]}],"functionalCapabilities":[{"description":"asdfasdfsa"},{"description":"asdfs"},{"description":"asdfs"},{"description":"asdf"}],"nonFunctionalCapabilities":[{"description":"asdfasddfas"}],"title":"I'm a title","purpose":"a large drawn out purpose","createdBy":"Joel","createdDate":"2015-01-21T05:00:00.000Z","reviewedBy":"steve","reviewedDate":"2015-01-22T05:00:00.000Z"} ;
+
+        //$scope.doc = {};
         $scope.doc.selectedDate = new Date();
         $scope.doc.selectedDateAsNumber = Date.UTC(1986, 1, 22);
         // $scope.fromDate = new Date();
@@ -28,15 +31,16 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
             });
         };
 
-        $scope.doc.useCases = [];
+        //$scope.doc.useCases = [];
 
-        $scope.addUseCase = function (blah) {
+        $scope.addUseCase = function () {
             // console.debug(blah.$modelValue)
             $scope.doc.useCases.push({
                 id: $scope.doc.useCases.length + 1,
                 description: "",
                 subCases: []
             });
+
         };
         $scope.removeUseCase = function () {
             scope.remove();
@@ -46,7 +50,7 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
         $scope.addSubUseCase = function (scope) {
 
             var nodeData = scope.$modelValue;
-            console.debug(nodeData)
+            console.debug(nodeData.id)
             nodeData.subCases.push({
                 id: nodeData.id + '.' + (nodeData.subCases.length + 1),
                 description: "",
@@ -55,7 +59,7 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
         };
 
 
-        $scope.doc.functionalCapabilities = [];
+      
 
         $scope.addFuncCapability = function () {
 
@@ -65,7 +69,7 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
         };
 
 
-        $scope.doc.nonFunctionalCapabilities = [];
+       
 
         $scope.addNonFuncCapability = function () {
 
