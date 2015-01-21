@@ -1,4 +1,4 @@
-var softwareDocApp = angular.module('softwareDocApp', ['ngRoute', 'ngAnimate','ngSanitize', 'formControllers', 'mgcrea.ngStrap', 'ui.tree']);
+var softwareDocApp = angular.module('softwareDocApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'formControllers', 'mgcrea.ngStrap', 'ui.tree']);
 var formControllers = angular.module('formControllers', []);
 
 softwareDocApp.config(['$routeProvider', function ($routeProvider) {
@@ -6,6 +6,10 @@ softwareDocApp.config(['$routeProvider', function ($routeProvider) {
                 when('/newproposal', {
                     templateUrl: 'views/projectProposal.html',
                     controller: 'ProjectProposalController'
+                })
+                .when('/newsolution', {
+                    templateUrl: 'views/solution.html',
+                    controller: 'ProposedSolutionController'
                 });
 
     }])

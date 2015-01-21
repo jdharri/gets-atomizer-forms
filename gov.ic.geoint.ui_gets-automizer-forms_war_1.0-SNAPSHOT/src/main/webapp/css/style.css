@@ -2,7 +2,7 @@
 
 
 /*reset*/
-html, body, div, span, applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a, abbr, acronym, address, big, cite, code,
+/*html, body, div, span, applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
@@ -18,7 +18,7 @@ time, mark, audio, video{
     font:inherit;
     font-size: 100%;
     vertical-align: baseline;
-}
+}*/
 html {
     line-height: 1;
 }
@@ -123,3 +123,26 @@ body {
 }
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/*
+* Datepicker element
+*/
+.datepicker.dropdown-menu {
+width: 250px;
+height: 270px;
+button {
+outline: none;
+border: 0px;
+}
+tbody {
+height: 180px;
+}
+tbody button {
+padding: 6px;
+}
+&.datepicker-mode-1, &.datepicker-mode-2 {
+tbody button {
+height: 65px;
+}
+}
+}
