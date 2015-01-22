@@ -1,12 +1,54 @@
-<nav class="navbar navbar-default navbar-static-top">
+
+
+
+
+<div class="navbar navbar-default navbar-static-top gets-navbar" role="navigation" bs-navbar>
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand gets-navbar" href="#">
+            <img class="gets-navbar-logo" src="images/GETSv4_logo-border.png" alt="GETS"/>
+        </a>
+    </div>
+    <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'" ng-click="navCollapsed = true">
+        <ul class="nav navbar-nav ">
+
+            <li class="dropdown">
+                <a href="#" class="gets-navbar dropdown-toggle " bs-dropdown>Documents <b class="caret"></b></a>
+                <ul class="dropdown-menu gets-navbar">
+                    <li class="gets-navbar"><a href="/#/newproposal">New Proposal</a></li>
+                    <li class="gets-navbar"><a href="/#/newsolution">New Solution</a></li>
+                    <li class="gets-navbar"><a href="#">Something else here</a></li>
+                    <li class="gets-navbar"><a href="#">Separated link</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!--<nav class="navbar navbar-default navbar-static-top gets-navbar" bs-navbar>
     <div class="container container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand gets-navbar" href="#">
-                 <img class="gets-navbar-logo" src="images/GETSv4_logo-border.png" alt="GETS"/>
+                <img class="gets-navbar-logo" src="images/GETSv4_logo-border.png" alt="GETS"/>
             </a>
         </div>
+       
     </div>
-</nav>
+
+</nav>-->
 
 
 <!--<div>

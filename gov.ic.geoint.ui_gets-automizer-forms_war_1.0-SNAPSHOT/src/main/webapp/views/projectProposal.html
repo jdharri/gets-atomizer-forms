@@ -3,10 +3,10 @@
     <form class="form-inline" name="projectProposal" novalidate 
           ng-submit="submit()">
         <div class="row requirements-form-element">
-            <div class="col-offset-6 col-lg-8 " style=" text-align: center">
+            <div class=" " style=" text-align: center">
                 <input class="form-control" type="text" placeholder="Document Title" autofocus
                        ng-model="doc.title" ng-required="true"/>
-                <div class="row document-title requirements-form-element" >
+                <div class="row  requirements-form-element" >
                     <h1 class="" >Software Project Proposal</h2>
                 </div>
             </div>
@@ -15,7 +15,7 @@
         <div class="row requirements-form-element" >
             <label class="requirements-form-section-title ">(U) Purpose</label>
             <div>
-                <textarea rows="8" cols="60" name="purpose" placeholder="Provide background details about the need for this project, including who will be using the software, environmental considerations (what networks will it be deployed to, requirement to operate disconnected, deployment requirements, etc), what problems the users of the software are currently facing (why is this needed), and what the users are doing now to solve their problem. Pictures, graphs, screenshots, or anything that can help explain the project better is recommended. This section should not provide justifications for individual use cases, capabilities, or solutions."
+                <textarea rows="8" cols="60" style="width:100%" name="purpose" placeholder="Provide background details about the need for this project, including who will be using the software, environmental considerations (what networks will it be deployed to, requirement to operate disconnected, deployment requirements, etc), what problems the users of the software are currently facing (why is this needed), and what the users are doing now to solve their problem. Pictures, graphs, screenshots, or anything that can help explain the project better is recommended. This section should not provide justifications for individual use cases, capabilities, or solutions."
                           ng-model="doc.purpose" ></textarea>
             </div>
         </div>
@@ -79,14 +79,12 @@
         <div class="row requirements-form-element" >
             <div class=" input-group"  ng-repeat="capability in doc.functionalCapabilities" >
 
-                <span class="input-group-addon glyphicon glyphicon-star"> </span>
+                <span class="input-group-addon ">{{capability.capabilityId}} </span>
                 <input class="form-control" type="text" name="capability" placeholder="Functional Capability"
                        ng-model="capability.description" ng-enter="addFuncCapability()" auto-focus/>
-                <span class="input-group-addon ">{{capability.capabilityId}} </span>
             </div>
             <button class="btn btn-default" ng-click="addFuncCapability()">
                 <span class="glyphicon glyphicon-plus"></span> Functional</button>
-
         </div>
 
 
@@ -98,36 +96,36 @@
 
             <div class="  input-group"  ng-repeat="capability in doc.nonFunctionalCapabilities" >
 
-                <span class="input-group-addon glyphicon glyphicon-star"> </span>
+                <span class="input-group-addon ">{{capability.capabilityId}} </span>
                 <input class="form-control" type="text" name="capability" placeholder="Non-functional Capability"
                        ng-model="capability.description" ng-enter="addNonFuncCapability()" auto-focus/>
-                <span class="input-group-addon ">{{capability.capabilityId}} </span>
+
             </div>
 
             <button class="btn btn-default" ng-click="addNonFuncCapability()">
                 <span class="glyphicon glyphicon-plus"></span> Non-functional</button>
 
         </div>
-        <div class="row">
-            <div class="col-md-3">
-                <label>Created By</label>
-                <input type="text" class="form-control" name="createdBy" ng-model="doc.createdBy" placeholder="Creator's name"/>
-                <div class="form-group " ng-class="{
-                        'has-error'
-                        : createdDate.$invalid}">
-                    <label class="control-label"><i class="fa fa-calendar"></i> Date created</label>
-                    <input type="text" class="form-control" ng-model="doc.createdDate" name="date" bs-datepicker>
-                </div>
-                <label>Reviewed By</label>
-                <input type="text" class="form-control " name="reviewedBy" ng-model="doc.reviewedBy" placeholder="Reviewer's name"/>
-                <div class="form-group " ng-class="{
-                        'has-error'
-                        : reviewedDate.$invalid}">
-                    <label class="control-label"><i class="fa fa-calendar"></i>Date Reviewed</label>
-                    <input type="text" class="form-control" ng-model="doc.reviewedDate" name="date" bs-datepicker>
-                </div>
-            </div>
-        </div>
+        <!--        <div class="row">
+                    <div class="col-md-3">
+                        <label>Created By</label>
+                        <input type="text" class="form-control" name="createdBy" ng-model="doc.createdBy" placeholder="Creator's name"/>
+                        <div class="form-group " ng-class="{
+                                'has-error'
+                                : createdDate.$invalid}">
+                            <label class="control-label"><i class="fa fa-calendar"></i> Date created</label>
+                            <input type="text" class="form-control" ng-model="doc.createdDate" name="date" bs-datepicker>
+                        </div>
+                        <label>Reviewed By</label>
+                        <input type="text" class="form-control " name="reviewedBy" ng-model="doc.reviewedBy" placeholder="Reviewer's name"/>
+                        <div class="form-group " ng-class="{
+                                'has-error'
+                                : reviewedDate.$invalid}">
+                            <label class="control-label"><i class="fa fa-calendar"></i>Date Reviewed</label>
+                            <input type="text" class="form-control" ng-model="doc.reviewedDate" name="date" bs-datepicker>
+                        </div>
+                    </div>
+                </div>-->
         <div class="row requirements-form-element">
             <button class="btn btn-default "><span class="glyphicon glyphicon-ok" style="color:green"></span> Save</button>
         </div>

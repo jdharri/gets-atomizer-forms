@@ -1,15 +1,18 @@
 <div class="input-group">
     <span class="input-group-addon "> {{node.id}}</span>
-    <input class="form-control" type="text" name="subusecase" placeholder="Use Case"
-           ng-model="node.description" auto-focus ng-enter="addSubUseCase();"/>
-    <a class="input-group-addon btn btn-primary btn-xs" data-nodrag ng-click="addSubUseCase(this)" style="margin-right: 8px;">
+    <input class="form-control" type="text" name="usecasestep" placeholder="Use Case Step"
+           ng-model="node.description" auto-focus ng-enter="addUseCaseStep(this)"/>
+    <a class="input-group-addon btn btn-primary btn-xs" data-nodrag ng-click="addUseCaseStep(this)" style="margin-right: 8px;">
         <span class="glyphicon glyphicon-plus"></span>
+    </a>
+     <a class="input-group-addon btn btn-primary btn-xs" data-nodrag ng-click="addPeerStep(this)" style="margin-right:16px;">
+        <span class="glyphicon glyphicon-triangle-top"></span>
     </a>
     <a class="input-group-addon btn btn-danger btn-xs" data-nodrag ng-click="remove(this)">
         <span class="glyphicon glyphicon-remove"></span>
     </a>
 </div>
-<div ui-tree-nodes="" ng-model="node.subCases">
-    <div ng-repeat="node in node.subCases" ui-tree-node data-nodrag ng-include="'views/usecase_renderer.html'">
+<div ui-tree-nodes="" ng-model="node.steps">
+    <div ng-repeat="node in node.steps" ui-tree-node data-nodrag ng-include="'views/usecase_renderer.html'">
     </div>
 </div>

@@ -3,46 +3,51 @@
     <form class="form-inline" name="projectProposal" novalidate 
           ng-submit="submit()">
         <div class="row requirements-form-element">
-            <div class="col-offset-6 col-lg-8 " style=" text-align: center">
-                <input class="form-control" type="text" placeholder="Document Title" autofocus
+            <div class=" " style=" text-align: center">
+                <input class="form-control" type="text" name="projectName" placeholder="Document Title" autofocus
                        ng-model="doc.title" ng-required="true"/>
-                <div class="row document-title requirements-form-element" >
-                    <h1 class="" >Software Project Proposal</h2>
+                <div class="row document-title requirements-form-element"  >
+                    <span class="" >Proposed Solution: </span>
+
+                    <input type="text" class="form-control" name="proposalName"/>
+
                 </div>
             </div>
         </div>
 
-        <div class="row requirements-form-element" >
-            <label class="requirements-form-section-title ">(U) Purpose</label>
-            <div>
-                <textarea rows="8" cols="60" name="purpose" placeholder="Provide background details about the need for this project, including who will be using the software, environmental considerations (what networks will it be deployed to, requirement to operate disconnected, deployment requirements, etc), what problems the users of the software are currently facing (why is this needed), and what the users are doing now to solve their problem. Pictures, graphs, screenshots, or anything that can help explain the project better is recommended. This section should not provide justifications for individual use cases, capabilities, or solutions."
-                          ng-model="doc.purpose" ></textarea>
-            </div>
+        <div class=" requirements-form-element"  >
+            <label class="requirements-form-section-title ">(U) Summary</label>
+
+            <textarea class="form-control boxsizingBorder" style="width:100%" rows="8"  name="purpose" placeholder="Provide a summarized explanation about the proposed solution, including a brief description of the technologies used, an estimation for the amount of development, administrative, and IA time (man/hrs) to complete the project, any significant benefits and risks of this approach. This should be no more than 4 paragraphs."
+                      ng-model="doc.summary" ></textarea>
         </div>
 
         <div class="requirements-form-element">
-            <label  class=" requirements-form-section-title ">(U) Actors</label>
-            <div class="row">
-                <div class="col-offset-2 col-md-10">Lists the actors, or users, of this system, along with a brief description of that actor. Actors will be referenced by both use cases and functional capabilities of the project.</div>
+            <label  class=" requirements-form-section-title ">(U) Proposed Milestones</label>
+            <div class="row" >
+                <div class="col-offset-2 col-md-10">This section should explain each planned milestone, the deliverable capabilities at each milestone, and how much
+
+work it would take to accomplish each milestone. This proposed plan would act as an initial implementation guideline
+
+but upon acceptance would be subject to change due to dynamic prioritization. Therefore, it's highly recommended
+
+that milestones are developed off of a versioned prioritized capability list, so that different proposals can be evaluated
+
+off the same set of capabilities.</div>
             </div>
         </div>
-        <div class="row requirements-form-element" >
+        <div class="row requirements-form-element" style="border: 1px solid black;">
 
-            <div class=" form-group input-group"  ng-repeat="actor in doc.actors" >
-                <div class="col-md-3">
-                    <input class="form-control " type="text" name="actorname" placeholder="Actor Name"
-                           ng-model="actor.name" auto-focus/>
+            <div class="  input-group"  ng-repeat="milestone in doc.milestones" >
+                <div class="col-md-12" >
+                    <span class="input-group-addon"
+                    <input class="form-control " type="text" name="milestone" placeholder="Milestone"
+                           ng-model="milestone.description" auto-focus ng-enter="addMileStone()"/>
                 </div>
-                <div class="col-md-6">
-                    <input class="form-control " type="text" name="actordescription" placeholder="Description"
-                           ng-model="actor.description"  ng-enter="addActor()"/>
-                </div>
-                <div class="col-md-3">
-                    <input class="form-control " type="text" name="actorcode" placeholder="Actor Code"
-                           ng-model="actor.code"  ng-enter="addActor()"/>
-                </div>
+               
+            
             </div>
-            <button class="btn btn-default " ng-click="addActor()"><span class="glyphicon glyphicon-plus"></span> actor</button>
+            <button class="btn btn-default " ng-click="addMileStone()"><span class="glyphicon glyphicon-plus"></span> Milestone</button>
         </div>
 
 

@@ -20,6 +20,14 @@ softwareDocApp.controller('NavbarController', function NavbarController($scope, 
 
 
 });
+softwareDocApp.controller('DropdownCtrl', function($scope) {
+ 
+    $scope.items = [
+        "The first choice!",
+        "And another choice for you.",
+        "but wait! A third!"
+    ];
+});
 softwareDocApp.directive('autoFocus', function ($timeout) {
     return {
         restrict: 'AC',
