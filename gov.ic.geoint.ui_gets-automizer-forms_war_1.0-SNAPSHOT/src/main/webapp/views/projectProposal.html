@@ -4,8 +4,13 @@
           ng-submit="submit()">
         <div class="row requirements-form-element">
             <div class=" " style=" text-align: center">
-                <input class="form-control" type="text" placeholder="Document Title" autofocus
+                <input class="form-control" type="text" name="proposalName" placeholder="Proposal Name" autofocus
                        ng-model="doc.title" ng-required="true"/>
+                <div class="alert alert-danger validationerror"  ng-show="projectProposal.proposalName.$invalid && projectProposal.proposalName.$touched">
+                    <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true"> 
+                        </span> A title is required
+                   
+                </div>
                 <div class="row  requirements-form-element" >
                     <h1 class="" >Software Project Proposal</h2>
                 </div>
@@ -16,7 +21,13 @@
             <label class="requirements-form-section-title ">(U) Purpose</label>
             <div>
                 <textarea rows="8" cols="60" style="width:100%" name="purpose" placeholder="Provide background details about the need for this project, including who will be using the software, environmental considerations (what networks will it be deployed to, requirement to operate disconnected, deployment requirements, etc), what problems the users of the software are currently facing (why is this needed), and what the users are doing now to solve their problem. Pictures, graphs, screenshots, or anything that can help explain the project better is recommended. This section should not provide justifications for individual use cases, capabilities, or solutions."
-                          ng-model="doc.purpose" ></textarea>
+                          ng-model="doc.purpose" ng-required="true"></textarea>
+                <div class="alert alert-danger validationerror" 
+                     ng-show="projectProposal.purpose.$invalid && projectProposal.purpose.$touched">
+                    <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
+                      </span>  A purpose is required
+                    
+                </div>
             </div>
         </div>
 
@@ -26,7 +37,7 @@
                 <div class="col-offset-2 col-md-10">Lists the actors, or users, of this system, along with a brief description of that actor. Actors will be referenced by both use cases and functional capabilities of the project.</div>
             </div>
         </div>
-        <div class="row requirements-form-element" >
+        <div class="row requirements-form-element" > 
 
             <div class=" form-group input-group"  ng-repeat="actor in doc.actors" >
                 <div class="col-md-3">
@@ -127,7 +138,8 @@
                     </div>
                 </div>-->
         <div class="row requirements-form-element">
-            <button class="btn btn-default "><span class="glyphicon glyphicon-ok" style="color:green"></span> Save</button>
+            <button class="btn btn-default "
+                    ng-disabled="projectProposal.$invalid"><span class="glyphicon glyphicon-ok" style="color:green"></span> Save</button>
         </div>
     </form>
     {{doc}}

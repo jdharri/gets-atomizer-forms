@@ -1,14 +1,14 @@
 <div class="input-group">
     <span class="input-group-addon "> {{node.id}}</span>
-    <input class="form-control" type="text" name="usecasestep" placeholder="Use Case Step"
+    <input class="form-control" type="text" name="usecasestep"  placeholder="Use Case Step"
            ng-model="node.description" auto-focus ng-enter="addUseCaseStep(this)"/>
-    <a class="input-group-addon btn btn-primary btn-xs" data-nodrag ng-click="addUseCaseStep(this)" style="margin-right: 8px;">
-        <span class="glyphicon glyphicon-plus"></span>
+    <a class="input-group-addon btn btn-primary btn-xs" title="add child step" data-nodrag ng-click="addUseCaseStep(this)" style="margin-right: 8px;">
+        <span class="icon-child"></span>
     </a>
-     <a class="input-group-addon btn btn-primary btn-xs" data-nodrag ng-click="addPeerStep(this)" style="margin-right:16px;">
-        <span class="glyphicon glyphicon-triangle-top"></span>
+     <a class="input-group-addon btn btn-primary btn-xs" title="add peer step" data-nodrag ng-click="addPeerStep(this)" style="margin-right:16px;">
+        <span class="glyphicon  glyphicon-list" ></span>
     </a>
-    <a class="input-group-addon btn btn-danger btn-xs" data-nodrag ng-click="remove(this)">
+    <a class="input-group-addon btn btn-danger btn-xs" title="remove step" data-nodrag ng-click="remove(this)">
         <span class="glyphicon glyphicon-remove"></span>
     </a>
 </div>
