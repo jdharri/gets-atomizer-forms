@@ -6,7 +6,7 @@ softwareDocApp.config(function ($datepickerProvider) {
 })
 softwareDocApp.controller('ProjectProposalController', ['$scope', function ProjectProposalController($scope) {
 
-        //$scope.doc ={"selectedDate":"2015-01-21T18:31:09.267Z","selectedDateAsNumber":509414400000,"actors":[{"name":"Joe Schmuckatelli","description":"a person","code":"js1"}],"useCases":[{"id":1,"description":"asdfaas","subCases":[{"id":"1.1","description":"dfas","subCases":[{"id":"1.1.1","description":"","subCases":[]},{"id":"1.1.2","description":"","subCases":[]},{"id":"1.1.3","description":"","subCases":[]}]},{"id":"1.2","description":"dfasddf","subCases":[{"id":"1.2.1","description":"","subCases":[]}]}]},{"id":2,"description":"asddfaas","subCases":[]}],"functionalCapabilities":[{"description":"asdfasdfsa"},{"description":"asdfs"},{"description":"asdfs"},{"description":"asdf"}],"nonFunctionalCapabilities":[{"description":"asdfasddfas"}],"title":"I'm a title","purpose":"a large drawn out purpose","createdBy":"Joel","createdDate":"2015-01-21T05:00:00.000Z","reviewedBy":"steve","reviewedDate":"2015-01-22T05:00:00.000Z"} ;
+        //$scope.doc ={"selectedDate":"2015-01-27T20:53:27.732Z","selectedDateAsNumber":509414400000,"actors":[{"name":"gsddffg","description":"1 sddfg sddf","code":"as1"}],"useCases":[{"id":1,"description":"sdfgsfdgssd","steps":[{"id":"1.1","description":"sdfgsdffg ssddfg s sddf","steps":[{"id":"1.1.1","description":"d gsddf gdsdf","steps":[]},{"id":"1.1.2","description":"sdf gsdfg","steps":[]}]}]},{"id":2,"description":"sdfg s sd df","steps":[]}],"nonFunctionalCapabilities":[{"description":"sdffg"},{"description":"ssdffgsfd"},{"description":"gssdfg"}],"functionalCapabilities":[{"description":"sgsd"},{"description":"gdsdf"},{"description":"gsddfg"},{"description":"sdffgsfdg"}],"purpose":"asdfaasd fasd fsad fasdf a asdf","title":"a sdfasd asddf"} ;
 
         $scope.doc = {};
         $scope.doc.selectedDate = new Date();
@@ -29,9 +29,15 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
 
             $scope.doc.actors.push({
                 name: "",
-                description: ""
+                description: "",
+                code:""
             });
         };
+        $scope.uniqueActorCode = function(item){
+           console.log($scope.modelValue)
+            // $scope.doc.
+        }
+        
         if (!$scope.doc.useCases) {
             $scope.doc.useCases = [];
         }
@@ -64,17 +70,23 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
         $scope.addPeerStep = function (scope) {
             var nodeData;
             if (scope.$parentNodeScope) {
+
                 nodeData = scope.$parentNodeScope.$modelValue;
+
+                nodeData.steps.push({
+                    id: nodeData.id + '.' + (nodeData.steps.length + 1),
+                    description: "",
+                    steps: []
+                });
+
             } else {
+
                 nodeData = scope.$modelValue;
+                $scope.addUseCase();
+                return;
             }
 
-            console.debug(nodeData)
-            nodeData.steps.push({
-                id: nodeData.id + '.' + (nodeData.steps.length + 1),
-                description: "",
-                steps: []
-            })
+
         };
 
 
@@ -90,7 +102,12 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
                 description: ""
             });
         };
+   $scope.removeFuncCapability = function (item) {
+          console.debug(item)
+            var index = $scope.doc.functionalCapabilities.indexOf(item);
+            $scope.doc.functionalCapabilities.splice(index, 1);
 
+        };
 
 
         $scope.addNonFuncCapability = function () {
@@ -102,7 +119,12 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
                 description: ""
             });
         };
+        $scope.removeNonFuncCapability = function (item) {
+          console.debug(item)
+            var index = $scope.doc.nonFunctionalCapabilities.indexOf(item);
+            $scope.doc.nonFunctionalCapabilities.splice(index, 1);
 
+        };
         $scope.submit = function () {
             console.log($scope.doc);
         }

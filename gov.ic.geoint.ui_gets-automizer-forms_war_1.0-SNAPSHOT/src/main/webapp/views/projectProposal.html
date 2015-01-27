@@ -8,8 +8,8 @@
                        ng-model="doc.title" ng-required="true"/>
                 <div class="alert alert-danger validationerror"  ng-show="projectProposal.proposalName.$invalid && projectProposal.proposalName.$touched">
                     <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true"> 
-                        </span> A title is required
-                   
+                    </span> A title is required
+
                 </div>
                 <div class="row  requirements-form-element" >
                     <h1 class="" >Software Project Proposal</h2>
@@ -25,8 +25,8 @@
                 <div class="alert alert-danger validationerror" 
                      ng-show="projectProposal.purpose.$invalid && projectProposal.purpose.$touched">
                     <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
-                      </span>  A purpose is required
-                    
+                    </span>  A purpose is required
+
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                            ng-model="actor.description"  ng-enter="addActor()"/>
                 </div>
                 <div class="col-md-3">
-                    <input class="form-control " type="text" name="actorcode" placeholder="Actor Code"
+                    <input class="form-control " ng-change="uniqueActorCode(this)" type="text" name="actorcode"  placeholder="Actor Code"
                            ng-model="actor.code"  ng-enter="addActor()"/>
                 </div>
             </div>
@@ -90,9 +90,12 @@
         <div class="row requirements-form-element" >
             <div class=" input-group"  ng-repeat="capability in doc.functionalCapabilities" >
 
-                <span class="input-group-addon ">{{capability.capabilityId}} </span>
+                <span class="input-group-addon " ng-show="capability.capabilityId">{{capability.capabilityId}} </span>
                 <input class="form-control" type="text" name="capability" placeholder="Functional Capability"
                        ng-model="capability.description" ng-enter="addFuncCapability()" auto-focus/>
+                <a class="input-group-addon btn btn-danger btn-xs" title="remove capability" data-nodrag ng-click="removeFuncCapability(capability)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
             </div>
             <button class="btn btn-default" ng-click="addFuncCapability()">
                 <span class="glyphicon glyphicon-plus"></span> Functional</button>
@@ -106,11 +109,12 @@
         <div class="row requirements-form-element" >
 
             <div class="  input-group"  ng-repeat="capability in doc.nonFunctionalCapabilities" >
-
-                <span class="input-group-addon ">{{capability.capabilityId}} </span>
+                <span class="input-group-addon " ng-show="capability.capabilityId">{{capability.capabilityId}} </span>
                 <input class="form-control" type="text" name="capability" placeholder="Non-functional Capability"
                        ng-model="capability.description" ng-enter="addNonFuncCapability()" auto-focus/>
-
+                <a class="input-group-addon btn btn-danger btn-xs" title="remove capability" data-nodrag ng-click="removeNonFuncCapability(capability)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
             </div>
 
             <button class="btn btn-default" ng-click="addNonFuncCapability()">

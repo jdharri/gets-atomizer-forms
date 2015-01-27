@@ -51,3 +51,15 @@ softwareDocApp.directive('ngEnter', function () {
         });
     };
 });
+softwareDocApp.directive('hcUnique', function(){
+    alert('here')
+    return {
+        restrict:'A',
+        require:'ngModel',
+        link:function(scope, element, attrs, ngModel){
+         ngModel.$parsers.unshift(function(value){
+                console.log(value);
+            });
+        }
+    }
+})
