@@ -20,8 +20,8 @@ softwareDocApp.controller('NavbarController', function NavbarController($scope, 
 
 
 });
-softwareDocApp.controller('DropdownCtrl', function($scope) {
- 
+softwareDocApp.controller('DropdownCtrl', function ($scope) {
+
     $scope.items = [
         "The first choice!",
         "And another choice for you.",
@@ -42,6 +42,7 @@ softwareDocApp.directive('ngEnter', function () {
     return function ($scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
             if (event.which === 13) {
+
                 $scope.$apply(function () {
                     $scope.$eval(attrs.ngEnter);
                 });
@@ -51,14 +52,40 @@ softwareDocApp.directive('ngEnter', function () {
         });
     };
 });
-softwareDocApp.directive('hcUnique', function(){
-    alert('here')
+softwareDocApp.factory('uniqueField', [function () {
+
+    }]);
+softwareDocApp.directive('hcUnique', function () {
+
     return {
-        restrict:'A',
-        require:'ngModel',
-        link:function(scope, element, attrs, ngModel){
-         ngModel.$parsers.unshift(function(value){
-                console.log(value);
+        require: 'ngModel',
+        link: function (scope, element, attrs, ngModel) {
+
+
+            ngModel.$parsers.unshift(function (viewValue) {
+
+                if (scope.doc.actors.length > 1) {
+                    ngModel.$setValidity('unique', true);
+                    var unique = true;
+                    scope.doc.actors.forEach(function (o) {
+                        if (o.code) {
+
+                            if (o.code === viewValue) {
+                                unique = false;
+                                console.log('not unique')
+                                ngModel.$setValidity('unique', false);
+                                return 'undefined';
+                            }
+                        }
+                    });
+                    if (unique) {
+                        console.log(ngModel.$valid)
+                        return viewValue;
+                    }
+                } else {
+
+                    return viewValue;
+                }
             });
         }
     }

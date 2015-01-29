@@ -30,19 +30,21 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
             $scope.doc.actors.push({
                 name: "",
                 description: "",
-                code:""
+                code: ""
             });
         };
-        $scope.uniqueActorCode = function(item){
-           console.log($scope.modelValue)
-            // $scope.doc.
-        }
-        
+        $scope.removeActor = function (item) {
+
+            var index = $scope.doc.actors.indexOf(item);
+            $scope.doc.actors.splice(index, 1);
+
+        };
+
         if (!$scope.doc.useCases) {
             $scope.doc.useCases = [];
         }
         $scope.addUseCase = function () {
-            // console.debug(blah.$modelValue)
+
 
             $scope.doc.useCases.push({
                 id: $scope.doc.useCases.length + 1,
@@ -102,8 +104,8 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
                 description: ""
             });
         };
-   $scope.removeFuncCapability = function (item) {
-          console.debug(item)
+        $scope.removeFuncCapability = function (item) {
+
             var index = $scope.doc.functionalCapabilities.indexOf(item);
             $scope.doc.functionalCapabilities.splice(index, 1);
 
@@ -120,7 +122,7 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
             });
         };
         $scope.removeNonFuncCapability = function (item) {
-          console.debug(item)
+
             var index = $scope.doc.nonFunctionalCapabilities.indexOf(item);
             $scope.doc.nonFunctionalCapabilities.splice(index, 1);
 

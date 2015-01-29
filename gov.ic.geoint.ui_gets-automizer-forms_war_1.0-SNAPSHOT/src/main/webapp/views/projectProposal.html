@@ -1,5 +1,5 @@
 
-<section class="requirements-form " style="border:1px solid gray">
+<section class="requirements-form panel panel-default" >
     <form class="form-inline" name="projectProposal" novalidate 
           ng-submit="submit()">
         <div class="row requirements-form-element">
@@ -37,25 +37,55 @@
                 <div class="col-offset-2 col-md-10">Lists the actors, or users, of this system, along with a brief description of that actor. Actors will be referenced by both use cases and functional capabilities of the project.</div>
             </div>
         </div>
-        <div class="row requirements-form-element" > 
+        <div class="row requirements-form-element" style="margin:2em; padding:2em;" > 
 
-            <div class=" form-group input-group"  ng-repeat="actor in doc.actors" >
-                <div class="col-md-3">
-                    <input class="form-control " type="text" name="actorname" placeholder="Actor Name"
-                           ng-model="actor.name" auto-focus/>
-                </div>
-                <div class="col-md-6">
-                    <input class="form-control " type="text" name="actordescription" placeholder="Description"
-                           ng-model="actor.description"  ng-enter="addActor()"/>
-                </div>
-                <div class="col-md-3">
-                    <input class="form-control " ng-change="uniqueActorCode(this)" type="text" name="actorcode"  placeholder="Actor Code"
-                           ng-model="actor.code"  ng-enter="addActor()"/>
-                </div>
+            <div  ng-repeat="actor in doc.actors" >
+
+                <div ng-form="actorform">
+
+                    <div class="col-md-3">
+
+                        <input class="form-control" type="text" name="actorname" placeholder="Actor Name"
+                               ng-model="actor.name" hc-Unique="" ng-required="true" auto-focus/>
+                        <div class="alert-danger validationerror" 
+                             ng-show="actorform.actorname.$error.unique">
+                            <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
+                            </span><span class="errorMessage"> must be unique</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6" >
+                        <input class="form-control" type="text" name="actordescription" placeholder="Description"
+                               ng-model="actor.description" ng-required="true" />
+
+                    </div>
+
+                    <div class=" col-md-3" style="display:block;">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="code" hc-Unique="face"  placeholder="Actor Code"
+                                   ng-model="actor.code" ng-required="true" ng-enter="addActor()"/>
+
+                            <a class="input-group-addon btn btn-danger btn-xs" title="remove capability" data-nodrag ng-click="removeActor(actor)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+
+                        </div>
+                        <div class="alert-danger validationerror" 
+                             ng-show="actorform.code.$error.unique">
+                            <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
+                            </span><span class="errorMessage"> must be unique</span>
+                        </div>
+                    </div>
+
+                </div >
+
             </div>
-            <button class="btn btn-default " ng-click="addActor()"><span class="glyphicon glyphicon-plus"></span> actor</button>
-        </div>
 
+
+        </div>
+        <div class=" requirements-form-element" style="display:block; padding:2em; margin:2em;" >
+          
+            <button class="btn btn-default " ng-disabled="projectProposal.actorform.$invalid" ng-click="addActor()"><span class="glyphicon glyphicon-plus"></span> actor</button>
+        </div>
 
         <div class="requirements-form-element">
             <label  class="requirements-form-section-title ">(U) Use Cases</label>
@@ -72,10 +102,12 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+        <div class="requirements-form-element">
             <button class="btn btn-default" ng-click="addUseCase()">
                 <span class="glyphicon glyphicon-plus"></span> Use Case</button>
         </div>
-
         <div class="row requirements-form-element" >
             <label class="requirements-form-section-title ">(U) Capabilities</label>
             <div>
