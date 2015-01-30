@@ -1,5 +1,6 @@
+<label>Title</label>
 <div class="input-group">
-    <span class="input-group-addon "> {{node.id}}</span>
+    <span class="input-group-addon "> {{node.sequence}}</span>
     <input class="form-control" type="text" name="usecasestep"  placeholder="Use Case Step"
            ng-model="node.description" auto-focus ng-enter="addUseCaseStep(this)"/>
     <a class="input-group-addon btn btn-primary btn-xs" title="add child step" data-nodrag ng-click="addUseCaseStep(this)" style="margin-right: 8px;">

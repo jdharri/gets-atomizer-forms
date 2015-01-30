@@ -6,7 +6,7 @@ softwareDocApp.config(function ($datepickerProvider) {
 })
 softwareDocApp.controller('ProjectProposalController', ['$scope', function ProjectProposalController($scope) {
 
-        //$scope.doc ={"selectedDate":"2015-01-27T20:53:27.732Z","selectedDateAsNumber":509414400000,"actors":[{"name":"gsddffg","description":"1 sddfg sddf","code":"as1"}],"useCases":[{"id":1,"description":"sdfgsfdgssd","steps":[{"id":"1.1","description":"sdfgsdffg ssddfg s sddf","steps":[{"id":"1.1.1","description":"d gsddf gdsdf","steps":[]},{"id":"1.1.2","description":"sdf gsdfg","steps":[]}]}]},{"id":2,"description":"sdfg s sd df","steps":[]}],"nonFunctionalCapabilities":[{"description":"sdffg"},{"description":"ssdffgsfd"},{"description":"gssdfg"}],"functionalCapabilities":[{"description":"sgsd"},{"description":"gdsdf"},{"description":"gsddfg"},{"description":"sdffgsfdg"}],"purpose":"asdfaasd fasd fsad fasdf a asdf","title":"a sdfasd asddf"} ;
+      //  $scope.doc ={"selectedDate":"2015-01-27T20:53:27.732Z","selectedDateAsNumber":509414400000,"actors":[{"name":"gsddffg","description":"1 sddfg sddf","code":"as1"}],"useCases":[{"id":1,"description":"sdfgsfdgssd","steps":[{"id":"1.1","description":"sdfgsdffg ssddfg s sddf","steps":[{"id":"1.1.1","description":"d gsddf gdsdf","steps":[]},{"id":"1.1.2","description":"sdf gsdfg","steps":[]}]}]},{"id":2,"description":"sdfg s sd df","steps":[]}],"nonFunctionalCapabilities":[{"description":"sdffg"},{"description":"ssdffgsfd"},{"description":"gssdfg"}],"functionalCapabilities":[{"description":"sgsd"},{"description":"gdsdf"},{"description":"gsddfg"},{"description":"sdffgsfdg"}],"purpose":"asdfaasd fasd fsad fasdf a asdf","title":"a sdfasd asddf"} ;
 
         $scope.doc = {};
         $scope.doc.selectedDate = new Date();
@@ -47,7 +47,7 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
 
 
             $scope.doc.useCases.push({
-                id: $scope.doc.useCases.length + 1,
+                sequence: $scope.doc.useCases.length + 1,
                 description: "",
                 steps: []
             });
@@ -63,7 +63,7 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
             var nodeData = scope.$modelValue;
 
             nodeData.steps.push({
-                id: nodeData.id + '.' + (nodeData.steps.length + 1),
+                sequence: nodeData.sequence + '.' + (nodeData.steps.length + 1),
                 description: "",
                 steps: []
             })
@@ -76,7 +76,7 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
                 nodeData = scope.$parentNodeScope.$modelValue;
 
                 nodeData.steps.push({
-                    id: nodeData.id + '.' + (nodeData.steps.length + 1),
+                    sequence: nodeData.sequence + '.' + (nodeData.steps.length + 1),
                     description: "",
                     steps: []
                 });
@@ -87,14 +87,11 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
                 $scope.addUseCase();
                 return;
             }
-
-
         };
 
-
-
-
-
+        if (!$scope.doc.functionalCapabilities) {
+            $scope.doc.functionalCapabilities = [];
+        }
 
         $scope.addFuncCapability = function () {
             if (!$scope.doc.functionalCapabilities) {
@@ -110,7 +107,9 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
             $scope.doc.functionalCapabilities.splice(index, 1);
 
         };
-
+ if (!$scope.doc.nonFunctionalCapabilities) {
+            $scope.doc.nonFunctionalCapabilities = [];
+        }
 
         $scope.addNonFuncCapability = function () {
 
@@ -128,6 +127,8 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
 
         };
         $scope.submit = function () {
+            $scope.doc.capabilities =  $scope.doc.nonFunctionalCapabilities.concat($scope.doc.functionalCapabilities);
+
             console.log($scope.doc);
         }
     }]);

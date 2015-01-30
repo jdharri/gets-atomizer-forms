@@ -3,26 +3,31 @@
     <form class="form-inline" name="projectProposal" novalidate 
           ng-submit="submit()">
         <div class="row requirements-form-element">
-            <div class=" " style=" text-align: center">
-                <input class="form-control" type="text" name="proposalName" placeholder="Proposal Name" autofocus
-                       ng-model="doc.title" ng-required="true"/>
-                <div class="alert alert-danger validationerror"  ng-show="projectProposal.proposalName.$invalid && projectProposal.proposalName.$touched">
-                    <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true"> 
-                    </span> A title is required
+            <div class=" " style="display:block; text-align: center">
 
-                </div>
-                <div class="row  requirements-form-element" >
-                    <h1 class="" >Software Project Proposal</h2>
+                <div class="form-group " ng-class="projectProposal.proposalName.$invalid && projectProposal.proposalName.$touched ? 'has-error':'has - success'">
+                    <input class="form-control" type="text" name="proposalName" placeholder="Proposal Name" autofocus
+                           ng-model="doc.title" ng-required="true" data-error="Bruh, that email address is invalid"/>
+                    <div class="validationerror" role="alert"  ng-show="projectProposal.proposalName.$invalid && projectProposal.proposalName.$touched">
+                        <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true"> 
+                        </span><span> A title is required</span>
+
+                    </div>
+
+                    <div class="row  requirements-form-element" >
+                        <h1>Software Project Proposal</h1>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="row requirements-form-element" >
-            <label class="requirements-form-section-title ">(U) Purpose</label>
-            <div>
+        <div class="row requirements-form-element " >
+
+            <div class="col-md-12 form-group has-error"  ng-class="projectProposal.purpose.$invalid && projectProposal.purpose.$touched ? 'has-error':'has - success'" >
+                <label class="requirements-form-section-title ">(U) Purpose</label>
                 <textarea rows="8" cols="60" style="width:100%" name="purpose" placeholder="Provide background details about the need for this project, including who will be using the software, environmental considerations (what networks will it be deployed to, requirement to operate disconnected, deployment requirements, etc), what problems the users of the software are currently facing (why is this needed), and what the users are doing now to solve their problem. Pictures, graphs, screenshots, or anything that can help explain the project better is recommended. This section should not provide justifications for individual use cases, capabilities, or solutions."
-                          ng-model="doc.purpose" ng-required="true"></textarea>
-                <div class="alert alert-danger validationerror" 
+                          ng-model="doc.purpose"  ng-required="true"></textarea>
+                <div class=" validationerror" 
                      ng-show="projectProposal.purpose.$invalid && projectProposal.purpose.$touched">
                     <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
                     </span>  A purpose is required
@@ -41,41 +46,48 @@
 
             <div  ng-repeat="actor in doc.actors" >
 
-                <div ng-form="actorform">
+                <div  ng-form="actorform">
+                    <div class="row">
+                        <div class="col-md-3  " ng-class="actorform.actorname.$invalid && actorform.actorname.$touched ? 'has-error':'has - success'">
+                            <label>Actor name</label>
+                            <div class="input-group">
 
-                    <div class="col-md-3">
+                                <input class="form-control" type="text" name="actorname" placeholder="Actor Name"
+                                       ng-model="actor.name" hc-Unique=""  ng-required="true" auto-focus/>
+                                <div class="validationerror" 
+                                     ng-show="actorform.actorname.$error.unique">
+                                    <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
+                                    </span><span class="errorMessage"> must be unique</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 " ng-class="actorform.actordescription.$invalid && actorform.actordescription.$touched ? 'has-error':'has - success'">
+                            <label>Description</label>
+                            <div class="input-group" style="width:100%">
+                                <input class="form-control" type="text" name="actordescription" placeholder="Description"
+                                       ng-model="actor.description" ng-required="true" />
+                            </div>
+                        </div>
 
-                        <input class="form-control" type="text" name="actorname" placeholder="Actor Name"
-                               ng-model="actor.name" hc-Unique="" ng-required="true" auto-focus/>
-                        <div class="alert-danger validationerror" 
-                             ng-show="actorform.actorname.$error.unique">
-                            <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
-                            </span><span class="errorMessage"> must be unique</span>
+                        <div class="col-md-3  " ng-class="actorform.code.$invalid && actorform.code.$touched  ? 'has-error':'has - success'">
+                            <label>Actor code</label>
+                            <div class="input-group" style="">
+
+                                <input class="form-control " type="text" name="code" hc-Unique="face"  placeholder="Actor Code"
+                                       ng-model="actor.code" ng-required="true"  ng-enter="addActor()"/>
+
+                                <a class="input-group-addon btn btn-danger btn-xs" title="remove capability" data-nodrag ng-click="removeActor(actor)">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </a>
+
+                            </div>
+                            <div class=" validationerror" 
+                                 ng-show="actorform.code.$error.unique">
+                                <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
+                                </span><span class="errorMessage"> must be unique</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6" >
-                        <input class="form-control" type="text" name="actordescription" placeholder="Description"
-                               ng-model="actor.description" ng-required="true" />
-
-                    </div>
-
-                    <div class=" col-md-3" style="display:block;">
-                        <div class="input-group">
-                            <input class="form-control" type="text" name="code" hc-Unique="face"  placeholder="Actor Code"
-                                   ng-model="actor.code" ng-required="true" ng-enter="addActor()"/>
-
-                            <a class="input-group-addon btn btn-danger btn-xs" title="remove capability" data-nodrag ng-click="removeActor(actor)">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
-
-                        </div>
-                        <div class="alert-danger validationerror" 
-                             ng-show="actorform.code.$error.unique">
-                            <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
-                            </span><span class="errorMessage"> must be unique</span>
-                        </div>
-                    </div>
-
                 </div >
 
             </div>
@@ -83,7 +95,7 @@
 
         </div>
         <div class=" requirements-form-element" style="display:block; padding:2em; margin:2em;" >
-          
+
             <button class="btn btn-default " ng-disabled="projectProposal.actorform.$invalid" ng-click="addActor()"><span class="glyphicon glyphicon-plus"></span> actor</button>
         </div>
 
@@ -97,8 +109,9 @@
         <div class="row requirements-form-element"  >
             <div ui-tree data-empty-place-holder-enabled="false">
                 <div ui-tree-nodes="" ng-model="doc.useCases">
-                    <div class=" col-md-12"  ng-repeat="node in doc.useCases" ui-tree-node data-nodrag ng-include="'views/usecase_renderer.html'">
 
+                    <div class=" col-md-12"  ng-repeat="node in doc.useCases" ui-tree-node data-nodrag ng-include="'views/usecase_renderer.html'">
+                        <label>Use Case</label>
                     </div>
                 </div>
             </div>
@@ -116,18 +129,21 @@
         </div>
 
         <div class="row requirements-form-element element-indent" >
-            <label class="requirements-form-section-title ">(U) Functional</label>
+            <h4>(U) Functional</h4>
 
         </div>
         <div class="row requirements-form-element" >
-            <div class=" input-group"  ng-repeat="capability in doc.functionalCapabilities" >
-
-                <span class="input-group-addon " ng-show="capability.capabilityId">{{capability.capabilityId}} </span>
-                <input class="form-control" type="text" name="capability" placeholder="Functional Capability"
-                       ng-model="capability.description" ng-enter="addFuncCapability()" auto-focus/>
-                <a class="input-group-addon btn btn-danger btn-xs" title="remove capability" data-nodrag ng-click="removeFuncCapability(capability)">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </a>
+           
+            <div  ng-repeat="capability in doc.functionalCapabilities" >
+                 <label>Functional Capability</label>
+                <div class="input-group">
+                    <span class="input-group-addon " ng-show="capability.capabilityId">{{capability.capabilityId}} </span>
+                    <input class="form-control" type="text" name="capability" placeholder="Functional Capability"
+                           ng-model="capability.description" ng-enter="addFuncCapability()" auto-focus/>
+                    <a class="input-group-addon btn btn-danger btn-xs" title="remove capability" data-nodrag ng-click="removeFuncCapability(capability)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
             </div>
             <button class="btn btn-default" ng-click="addFuncCapability()">
                 <span class="glyphicon glyphicon-plus"></span> Functional</button>
@@ -135,18 +151,20 @@
 
 
         <div class="row requirements-form-element element-indent" >
-            <label class="requirements-form-section-title ">(U) Non-functional</label>
-
+            <h4>(U) Non-functional</h4>
         </div>
         <div class="row requirements-form-element" >
 
-            <div class="  input-group"  ng-repeat="capability in doc.nonFunctionalCapabilities" >
-                <span class="input-group-addon " ng-show="capability.capabilityId">{{capability.capabilityId}} </span>
-                <input class="form-control" type="text" name="capability" placeholder="Non-functional Capability"
-                       ng-model="capability.description" ng-enter="addNonFuncCapability()" auto-focus/>
-                <a class="input-group-addon btn btn-danger btn-xs" title="remove capability" data-nodrag ng-click="removeNonFuncCapability(capability)">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </a>
+            <div ng-repeat="capability in doc.nonFunctionalCapabilities" >
+                <label>Non-Functional Capability</label>
+                <div class="input-group">
+                    <span class="input-group-addon " ng-show="capability.capabilityId">{{capability.capabilityId}} </span>
+                    <input class="form-control" type="text" name="capability" placeholder="Non-functional Capability"
+                           ng-model="capability.description" ng-enter="addNonFuncCapability()" auto-focus/>
+                    <a class="input-group-addon btn btn-danger btn-xs" title="remove capability" data-nodrag ng-click="removeNonFuncCapability(capability)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
             </div>
 
             <button class="btn btn-default" ng-click="addNonFuncCapability()">
@@ -178,5 +196,5 @@
                     ng-disabled="projectProposal.$invalid"><span class="glyphicon glyphicon-ok" style="color:green"></span> Save</button>
         </div>
     </form>
-    {{doc}}
+    
 </section>
