@@ -6,7 +6,7 @@ softwareDocApp.config(function ($datepickerProvider) {
 })
 softwareDocApp.controller('ProjectProposalController', ['$scope', function ProjectProposalController($scope) {
 
-      //  $scope.doc ={"selectedDate":"2015-01-27T20:53:27.732Z","selectedDateAsNumber":509414400000,"actors":[{"name":"gsddffg","description":"1 sddfg sddf","code":"as1"}],"useCases":[{"id":1,"description":"sdfgsfdgssd","steps":[{"id":"1.1","description":"sdfgsdffg ssddfg s sddf","steps":[{"id":"1.1.1","description":"d gsddf gdsdf","steps":[]},{"id":"1.1.2","description":"sdf gsdfg","steps":[]}]}]},{"id":2,"description":"sdfg s sd df","steps":[]}],"nonFunctionalCapabilities":[{"description":"sdffg"},{"description":"ssdffgsfd"},{"description":"gssdfg"}],"functionalCapabilities":[{"description":"sgsd"},{"description":"gdsdf"},{"description":"gsddfg"},{"description":"sdffgsfdg"}],"purpose":"asdfaasd fasd fsad fasdf a asdf","title":"a sdfasd asddf"} ;
+        //  $scope.doc ={"selectedDate":"2015-01-27T20:53:27.732Z","selectedDateAsNumber":509414400000,"actors":[{"name":"gsddffg","description":"1 sddfg sddf","code":"as1"}],"useCases":[{"id":1,"description":"sdfgsfdgssd","steps":[{"id":"1.1","description":"sdfgsdffg ssddfg s sddf","steps":[{"id":"1.1.1","description":"d gsddf gdsdf","steps":[]},{"id":"1.1.2","description":"sdf gsdfg","steps":[]}]}]},{"id":2,"description":"sdfg s sd df","steps":[]}],"nonFunctionalCapabilities":[{"description":"sdffg"},{"description":"ssdffgsfd"},{"description":"gssdfg"}],"functionalCapabilities":[{"description":"sgsd"},{"description":"gdsdf"},{"description":"gsddfg"},{"description":"sdffgsfdg"}],"purpose":"asdfaasd fasd fsad fasdf a asdf","title":"a sdfasd asddf"} ;
 
         $scope.doc = {};
         $scope.doc.selectedDate = new Date();
@@ -48,6 +48,8 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
 
             $scope.doc.useCases.push({
                 sequence: $scope.doc.useCases.length + 1,
+                title: "",
+                story: "",
                 description: "",
                 steps: []
             });
@@ -58,22 +60,24 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
         };
 
 
-        $scope.addUseCaseStep = function (scope) {
+        $scope.addUseCaseStep = function (node) {
+            //  console.debug(node)
 
-            var nodeData = scope.$modelValue;
 
-            nodeData.steps.push({
-                sequence: nodeData.sequence + '.' + (nodeData.steps.length + 1),
+            node.steps.push({
+                sequence: node.sequence + '.' + (node.steps.length + 1),
                 description: "",
                 steps: []
             })
         };
 
         $scope.addPeerStep = function (scope) {
+            //  console.debug(scope)
+
             var nodeData;
             if (scope.$parentNodeScope) {
-
-                nodeData = scope.$parentNodeScope.$modelValue;
+                console.log("if")
+                nodeData = scope.$parentNodeScope.node;
 
                 nodeData.steps.push({
                     sequence: nodeData.sequence + '.' + (nodeData.steps.length + 1),
@@ -82,9 +86,13 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
                 });
 
             } else {
-
-                nodeData = scope.$modelValue;
-                $scope.addUseCase();
+                console.log("else")
+                console.log(scope.$parent)
+                if (scope.$parent) {
+                    $scope.addUseCaseStep(scope.$parent.$modelValue);
+                } else {
+                    $scope.addUseCase();
+                }
                 return;
             }
         };
@@ -107,7 +115,7 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
             $scope.doc.functionalCapabilities.splice(index, 1);
 
         };
- if (!$scope.doc.nonFunctionalCapabilities) {
+        if (!$scope.doc.nonFunctionalCapabilities) {
             $scope.doc.nonFunctionalCapabilities = [];
         }
 
@@ -127,7 +135,7 @@ softwareDocApp.controller('ProjectProposalController', ['$scope', function Proje
 
         };
         $scope.submit = function () {
-            $scope.doc.capabilities =  $scope.doc.nonFunctionalCapabilities.concat($scope.doc.functionalCapabilities);
+            $scope.doc.capabilities = $scope.doc.nonFunctionalCapabilities.concat($scope.doc.functionalCapabilities);
 
             console.log($scope.doc);
         }

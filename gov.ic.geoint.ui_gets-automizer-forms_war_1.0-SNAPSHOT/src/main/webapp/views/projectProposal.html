@@ -25,8 +25,10 @@
 
             <div class="col-md-12 form-group has-error"  ng-class="projectProposal.purpose.$invalid && projectProposal.purpose.$touched ? 'has-error':'has - success'" >
                 <label class="requirements-form-section-title ">(U) Purpose</label>
+
                 <textarea rows="8" cols="60" style="width:100%" name="purpose" placeholder="Provide background details about the need for this project, including who will be using the software, environmental considerations (what networks will it be deployed to, requirement to operate disconnected, deployment requirements, etc), what problems the users of the software are currently facing (why is this needed), and what the users are doing now to solve their problem. Pictures, graphs, screenshots, or anything that can help explain the project better is recommended. This section should not provide justifications for individual use cases, capabilities, or solutions."
                           ng-model="doc.purpose"  ng-required="true"></textarea>
+
                 <div class=" validationerror" 
                      ng-show="projectProposal.purpose.$invalid && projectProposal.purpose.$touched">
                     <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
@@ -60,12 +62,22 @@
                                     </span><span class="errorMessage"> must be unique</span>
                                 </div>
                             </div>
+                            <div class=" validationerror" 
+                                 ng-show="actorform.actorname.$error.required && actorform.actorname.$touched">
+                                <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
+                                </span><span class="errorMessage"> required</span>
+                            </div>
                         </div>
                         <div class="col-md-6 " ng-class="actorform.actordescription.$invalid && actorform.actordescription.$touched ? 'has-error':'has - success'">
                             <label>Description</label>
                             <div class="input-group" style="width:100%">
                                 <input class="form-control" type="text" name="actordescription" placeholder="Description"
                                        ng-model="actor.description" ng-required="true" />
+                            </div>
+                            <div class=" validationerror" 
+                                 ng-show="actorform.actordescription.$error.required && actorform.actordescription.$touched">
+                                <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
+                                </span><span class="errorMessage"> required</span>
                             </div>
                         </div>
 
@@ -85,6 +97,11 @@
                                  ng-show="actorform.code.$error.unique">
                                 <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
                                 </span><span class="errorMessage"> must be unique</span>
+                            </div>
+                            <div class=" validationerror" 
+                                 ng-show="actorform.code.$error.required && actorform.code.$touched">
+                                <span class="glyphicon glyphicon-exclamation-sign " aria-hidden="true">
+                                </span><span class="errorMessage"> required</span>
                             </div>
                         </div>
                     </div>
@@ -109,14 +126,38 @@
         <div class="row requirements-form-element"  >
             <div ui-tree data-empty-place-holder-enabled="false">
                 <div ui-tree-nodes="" ng-model="doc.useCases">
+                    <div class=" col-md-12"  ng-repeat="uc in doc.useCases" ui-tree-node data-nodrag >
+                        <div class="input-group">
+                            <span class="input-group-addon "> {{uc.sequence}}</span>
+                            <input class="form-control" type="text" name="title"  placeholder="title"
+                                   ng-model="uc.title" auto-focus ng-enter="addUseCaseStep(this)"/>
+                            <input class="form-control" type="text" name="story"  placeholder="story"
+                                   ng-model="uc.story" auto-focus ng-enter="addUseCaseStep(this)"/>
 
-                    <div class=" col-md-12"  ng-repeat="node in doc.useCases" ui-tree-node data-nodrag ng-include="'views/usecase_renderer.html'">
-                        <label>Use Case</label>
-                    </div>
+
+                            <a class="input-group-addon btn btn-primary btn-xs" title="add child step" data-nodrag ng-click="addUseCaseStep(uc)" style="margin-right: 8px;">
+                                <span class="icon-child"></span>
+                            </a>
+                            <a class="input-group-addon btn btn-primary btn-xs" title="add peer step" data-nodrag ng-click="addPeerStep(uc)" style="margin-right:16px;">
+                                <span class="glyphicon  glyphicon-list" ></span>
+                            </a>
+                            <a class="input-group-addon btn btn-danger btn-xs" title="remove step" data-nodrag ng-click="remove(uc)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+                       
+                        <div class=" col-md-12"  ng-repeat="node in uc.steps" ui-tree-node data-nodrag ng-include="'views/usecase_renderer.html'">
+
+
+                        </div>
+
+                    </div> 
+
                 </div>
             </div>
 
         </div>
+       
         <div class="requirements-form-element">
             <button class="btn btn-default" ng-click="addUseCase()">
                 <span class="glyphicon glyphicon-plus"></span> Use Case</button>
@@ -133,9 +174,9 @@
 
         </div>
         <div class="row requirements-form-element" >
-           
+
             <div  ng-repeat="capability in doc.functionalCapabilities" >
-                 <label>Functional Capability</label>
+                <label>Functional Capability</label>
                 <div class="input-group">
                     <span class="input-group-addon " ng-show="capability.capabilityId">{{capability.capabilityId}} </span>
                     <input class="form-control" type="text" name="capability" placeholder="Functional Capability"
@@ -196,5 +237,5 @@
                     ng-disabled="projectProposal.$invalid"><span class="glyphicon glyphicon-ok" style="color:green"></span> Save</button>
         </div>
     </form>
-    
+
 </section>
